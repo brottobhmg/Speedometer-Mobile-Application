@@ -6,6 +6,9 @@ workflows:
       - name: Set up local.properties
         script: | 
           echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: aggiorna pacchetti
+        script: |
+          flutter pub upgrade --major-versions
       - name: Get Flutter packages
         script: | 
           flutter pub get
