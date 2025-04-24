@@ -1,8 +1,7 @@
 workflows:
   android-workflow:
     name: Android Workflow
-    max_build_duration: 120
-    environment:
+    max_build_duration: 1000
     scripts:
       - name: Set up local.properties
         script: | 
