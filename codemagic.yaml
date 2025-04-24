@@ -1,9 +1,24 @@
 workflows:
-
-    sample-workflow:
-
-        name: Codemagic Sample Workflow
-
-        max_build_duration: 120
-
-        instance_type: mac_mini_m2
+  android-workflow:
+    name: Android Workflow
+    max_build_duration: 120
+    environment:
+    scripts:
+      - name: Set up local.properties
+        script: | 
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: | 
+          flutter pub get
+      - name: Build AAB with Flutter
+        script: | 
+          flutter build apk
+    artifacts:
+      - build/**/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - cbx01@hotmail.it
+        notify:
+          success: true
+          failure: false
